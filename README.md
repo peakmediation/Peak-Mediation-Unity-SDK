@@ -1,11 +1,11 @@
-UnityPeakSDK v0.9.0
+UnityPeakSDK v0.11.0
 =======
 
 ## Requirements
 
 ### Minimum requirements
 
-    Unity 5.3.5
+    Unity 5.4.0
 
     iOS 7.0
 
@@ -71,14 +71,20 @@ If you are only going to test out one SDK this month, Peak Mediation’s all enc
 
         PeakSDKBridge.Instance.HandleNativeAdClicked("YOUR_ZONE_ID");
 
+
+    Use the next method to handle click on the "Privacy Icon" button. Call of this method will redirect the user to the website for that ad:
+
+        PeakSDKBridge.Instance.HandlePrivacyIconClicked("YOUR_ZONE_ID");
+
 9. Handle SDK events by subscribing to static actions:
 
-        PeakSDKBridge.OnCompleteInitialization = () => {};
-        PeakSDKBridge.OnShowBanner = () => {};
-        PeakSDKBridge.OnShowInterstitial = () => {};
-        PeakSDKBridge.OnCloseInterstitial = () => {};
-        PeakSDKBridge.OnCompleteRewardExperience = () => {};
-        PeakSDKBridge.OnFailInitialization = (string error) => {};
-        PeakSDKBridge.OnFailToShowBanner = (string error) => {};
-        PeakSDKBridge.OnFailToShowInterstitial = (string error) => {};
-        PeakSDKBridge.OnFailToShowNative = (string error) => {};
+        PeakSDKBridge.OnCompleteInitialization   = () => {};
+        PeakSDKBridge.OnShowBanner               = (string zone) => {};
+        PeakSDKBridge.OnShowInterstitial         = (string zone) => {};
+        PeakSDKBridge.OnCloseInterstitial        = (string zone) => {};
+        PeakSDKBridge.OnShowNative               = (string zone) => {};
+        PeakSDKBridge.OnCompleteRewardExperience = (string zone) => {};
+        PeakSDKBridge.OnFailInitialization       = (string error) => {};
+        PeakSDKBridge.OnFailToShowBanner         = (string zone, string error) => {};
+        PeakSDKBridge.OnFailToShowInterstitial   = (string zone, string error) => {};
+        PeakSDKBridge.OnFailToShowNative         = (string zone, string error) => {};
