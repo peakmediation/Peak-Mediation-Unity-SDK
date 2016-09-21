@@ -1,11 +1,11 @@
-UnityPeakSDK v0.11.0
+UnityPeakSDK v0.12.0
 =======
 
 ## Requirements
 
 ### Minimum requirements
 
-    Unity 5.4.0
+    Unity 5.4.1
 
     iOS 7.0
 
@@ -39,52 +39,65 @@ If you are only going to test out one SDK this month, Peak Mediation’s all enc
 
 3. Initialize SDK with your AppID:
 
-        PeakSDKBridge.Instance.Configure("YOUR_APP_ID");
+        Peak.Instance.Configure("YOUR_APP_ID");
 
 4. Check availability of ad in particular zone:
 
-        bool canShow = PeakSDKBridge.Instance.CanShowAd("YOUR_ZONE_ID");
+        bool canShow = Peak.Instance.CanShowAd("YOUR_ZONE_ID");
 
 5. Show insterstitial ad (for example by button click):
 
-        PeakSDKBridge.Instance.ShowInterstitial("YOUR_ZONE_ID");
+        Peak.Instance.ShowInterstitial("YOUR_ZONE_ID");
 
 6. Show banner view. You can place it in your app everywhere you want as overlay view:
 
-        PeakSDKBridge.Instance.ShowBanner("YOUR_ZONE_ID", x, y);
-        PeakSDKBridge.Instance.ShowBanner("YOUR_ZONE_ID", x, y, width, height);
-        PeakSDKBridge.Instance.ShowBanner("YOUR_ZONE_ID", rect);
+        Peak.Instance.ShowBanner("YOUR_ZONE_ID", x, y);
+        Peak.Instance.ShowBanner("YOUR_ZONE_ID", x, y, width, height);
+        Peak.Instance.ShowBanner("YOUR_ZONE_ID", rect);
 
 7. Remove banner view. Remove last shown banner view:
 
-        PeakSDKBridge.Instance.RemoveBanner();
+        Peak.Instance.RemoveBanner();
 
 8. Get native ad. Native Ads will allow developers to show ads in custom formats in their applications:
 
-        PeakNativeAd native = PeakSDKBridge.Instance.ShowNativeAd("YOUR_ZONE_ID");
+        PeakNativeAd native = Peak.Instance.ShowNativeAd("YOUR_ZONE_ID");
     
     Unlike Banner and Interstitial ads, the impressions and clicks are not automatically handled, and need to be wrapped when events do occur. Call the next method to track that native ad for current zone was shown:
 
-        PeakSDKBridge.Instance.TrackNativeAdShown("YOUR_ZONE_ID");
+        Peak.Instance.TrackNativeAdShown("YOUR_ZONE_ID");
     
     Use the next method to handle click on the "Call to Action" button. Call of this method will redirect the user to the website for that ad:
 
-        PeakSDKBridge.Instance.HandleNativeAdClicked("YOUR_ZONE_ID");
+        Peak.Instance.HandleNativeAdClicked("YOUR_ZONE_ID");
 
 
     Use the next method to handle click on the "Privacy Icon" button. Call of this method will redirect the user to the website for that ad:
 
-        PeakSDKBridge.Instance.HandlePrivacyIconClicked("YOUR_ZONE_ID");
+        Peak.Instance.HandlePrivacyIconClicked("YOUR_ZONE_ID");
 
 9. Handle SDK events by subscribing to static actions:
 
-        PeakSDKBridge.OnCompleteInitialization   = () => {};
-        PeakSDKBridge.OnShowBanner               = (string zone) => {};
-        PeakSDKBridge.OnShowInterstitial         = (string zone) => {};
-        PeakSDKBridge.OnCloseInterstitial        = (string zone) => {};
-        PeakSDKBridge.OnShowNative               = (string zone) => {};
-        PeakSDKBridge.OnCompleteRewardExperience = (string zone) => {};
-        PeakSDKBridge.OnFailInitialization       = (string error) => {};
-        PeakSDKBridge.OnFailToShowBanner         = (string zone, string error) => {};
-        PeakSDKBridge.OnFailToShowInterstitial   = (string zone, string error) => {};
-        PeakSDKBridge.OnFailToShowNative         = (string zone, string error) => {};
+        Peak.OnCompleteInitialization   = () => {};
+        Peak.OnShowBanner               = (string zone) => {};
+        Peak.OnShowInterstitial         = (string zone) => {};
+        Peak.OnCloseInterstitial        = (string zone) => {};
+        Peak.OnShowNative               = (string zone) => {};
+        Peak.OnCompleteRewardExperience = (string zone) => {};
+        Peak.OnFailInitialization       = (string error) => {};
+        Peak.OnFailToShowBanner         = (string zone, string error) => {};
+        Peak.OnFailToShowInterstitial   = (string zone, string error) => {};
+        Peak.OnFailToShowNative         = (string zone, string error) => {};
+
+10. Make async call that checks ad availability and executes completion if ad is available and async call is not canceled. All UI changes should be handled in completion, do not change UI in other place, if you use this call.
+
+        var asyncRequest = Peak.Instance.AsyncAdRequest (zone);
+        asyncRequest.Start (request => {
+            // Handle completion
+        });
+
+        this.asyncRequest = asyncRequest;
+
+    If you want to cancel async call use following method:
+
+        this.asyncRequest.Cancel ();
