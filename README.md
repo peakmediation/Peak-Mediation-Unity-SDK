@@ -1,4 +1,4 @@
-UnityPeakSDK v0.15.0
+UnityPeakSDK v0.17.0
 =======
 
 ## Requirements
