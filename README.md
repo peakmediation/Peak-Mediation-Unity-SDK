@@ -1,11 +1,11 @@
-UnityPeakSDK v0.15.0
+UnityPeakSDK v0.17.0
 =======
 
 ## Requirements
 
 ### Minimum requirements
 
-    Unity 5.4.1
+    Unity 5.5.0
 
     iOS 7.0
 
