@@ -1,13 +1,13 @@
-UnityPeakSDK v0.17.0
+UnityPeakSDK v0.18.0
 =======
 
 ## Requirements
 
 ### Minimum requirements
 
-    Unity 5.5.0
+    Unity 5.5.2
 
-    iOS 7.0
+    iOS 8.0
 
     Android 4.0.4 (API level 15)
 
